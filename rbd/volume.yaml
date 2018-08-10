@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: rbd
+spec:
+  containers:
+    - image: nginx
+      name: nginx
+      volumeMounts:
+      - name: rbd
+        mountPath: /data
+  volumes:
+    - name: rbd
+      rbd:
+        monitors:
+        - '172.19.7.18:6790'
+        pool: test
+        image: testimage
+        fsType: ext4
+        readOnly: false
+        user: admin
+        secretRef:
+          name: ceph-admin-secret

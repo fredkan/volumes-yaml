@@ -1,0 +1,21 @@
+
+# define pv with Kubernetes rbd
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ceph-rbd-pv
+spec:
+  capacity:
+    storage: 20Gi
+  accessModes:
+    - ReadWriteOnce
+  rbd:
+    monitors:
+      - 172.19.7.18:6790
+    pool: test
+    image: testimage
+    user: admin
+    secretRef:
+      name: ceph-admin-secret
+    fsType: ext4
+    readOnly: false

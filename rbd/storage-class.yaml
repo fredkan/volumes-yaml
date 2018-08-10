@@ -1,0 +1,18 @@
+# used for pvc, to dynameic create a pv
+# use rbd provisioner from external-storage
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: rbd
+provisioner: ceph.com/rbd
+parameters:
+  monitors: '172.19.7.18:6790'
+  pool: test
+  adminId: admin
+  adminSecretNamespace: ceph
+  adminSecretName: ceph-admin-secret
+  userId: admin
+  userSecretNamespace: ceph
+  userSecretName: ceph-admin-secret
+  imageFormat: "2"
+  imageFeatures: layering
