@@ -13,4 +13,7 @@ Volumes Yaml is just for this problem. We expect to collect all kinds volume, pv
     GlusterFs
     CephFs
     Minio
-    
+    hostPath
+    configMap
+    secret 
+    emptyDir   

@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+    volumeMounts:
+    - mountPath: /test-pd
+      name: hostpath
+  volumes:
+  - name: hostpath
+    hostPath:
+      # directory location on host
+      path: /data
+      # this field is optional
+      type: Directory
+
+# The directory Type
+# DirectoryOrCreate: Create Directory if not exist, Mode as 755, owner same with kubelet;
+# Directory: must exist;
+# FileOrCreate: Create file if not exist, Mode as 644, owner same with kubelet;
+# File: must exist;
+# Socket: must exist;
+# CharDevice: must exist;
+# BlockDevice: must exist
+

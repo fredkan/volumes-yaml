@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  nfs:
+    path: "/data/disk"
+    server: 192.168.2.7
+    readOnly: false
+
+# path can not be create automatic, Flexvolume (alicloud) can do this;
+# 
