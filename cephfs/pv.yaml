@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ceph-admin-secret
+type: "kubernetes.io/rbd"
+data:
+  key: ***
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: cephfs-pv
+  labels:
+    name: cephfs-pv
+spec:
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteMany
+  cephfs:
+    monitors: ['172.19.4.1:6790', '172.19.15.2:6790', '172.19.3.3:6790']
+    path: /
+    user: admin
+    secretRef:
+      name: ceph-admin-secret
+    readOnly: false
+  persistentVolumeReclaimPolicy: Retain
+
